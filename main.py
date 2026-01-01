@@ -10,7 +10,7 @@ def create_flask_app():
 
     # check project mode
     if env == 'production' and debug_mode:
-        app.logger.warn("⚠️ WARNING: Debug mode is enabled in production environment! This is a security risk.")
+        app.logger.warning("⚠️ WARNING: Debug mode is enabled in production environment! This is a security risk.")
 
     return app
 

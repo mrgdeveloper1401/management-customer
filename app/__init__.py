@@ -1,7 +1,8 @@
 from flask import Flask
-from decouple import config
 from app.database import db, migrate
 from app.config import Config
+# Import models so Alembic can discover them
+from app import models
 
 
 def create_app():
