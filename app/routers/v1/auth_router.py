@@ -8,10 +8,8 @@ from app.models import User, UserRole
 
 auth_router = Blueprint("auth", __name__)
 
-# login route - تغییر نام تابع برای جلوگیری از conflict با login_user
 @auth_router.route("/login", methods=['GET', "POST"])
 def login():
-    # اگر کاربر قبلاً لاگین کرده، redirect به صفحه اصلی
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
     
@@ -23,17 +21,9 @@ def login():
         user = User.query.filter_by(username=username).first()
         
         if user and check_password_hash(user.password_hash, password):
-            # استفاده از login_user داخلی Flask-Login
             login_user(user, remember=True)
             flash('با موفقیت وارد شدید!', 'success')
-            
-            # redirect بر اساس نقش کاربر
-            if user.is_superuser or user.is_staff:
-                return redirect(url_for("main.admin_dashboard"))
-            elif user.is_expert:
-                return redirect(url_for("main.expert_dashboard"))
-            else:
-                return redirect(url_for("main.dashboard"))
+            return redirect(url_for("main.dashboard"))
         else:
             flash('نام کاربری یا رمز عبور اشتباه است', 'error')
     
@@ -50,7 +40,6 @@ def logout():
 # register user
 @auth_router.route("/register", methods=['GET', 'POST'])
 def register():
-    # اگر کاربر قبلاً لاگین کرده، redirect به صفحه اصلی
     if current_user.is_authenticated:
         return redirect(url_for("main.index"))
         
@@ -62,7 +51,7 @@ def register():
         full_name = request.form.get('full_name')
         phone = request.form.get('phone')
         
-        # اعتبارسنجی
+        # validate
         if password != confirm_password:
             flash('رمز عبور و تأیید رمز عبور مطابقت ندارند', 'error')
             return redirect(url_for('auth.register'))
@@ -79,6 +68,11 @@ def register():
             flash('این ایمیل قبلاً ثبت شده است', 'error')
             return redirect(url_for('auth.register'))
         
+        existing_email = User.query.filter_by(phone=phone).first()
+        if existing_email:
+            flash("این شماره موبایل قبلا ثبت شده هست", 'error')
+            return redirect(url_for('auth.register'))
+
         # create new user
         new_user = User(
             username=username,
@@ -94,6 +88,6 @@ def register():
         db.session.commit()
         
         flash('ثبت‌نام با موفقیت انجام شد! لطفاً وارد شوید', 'success')
-        return redirect(url_for("auth.login"))
+        return redirect(url_for("main.dashboard"))
     
     return render_template("auth/register.html")
