@@ -1,0 +1,84 @@
+<!-- ***** Footer Area Start ***** -->
+<footer id="newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="section-heading">
+            <h4>برای دریافت آخرین اخبار در خبرنامه ما عضو شوید</h4>
+          </div>
+        </div>
+        <div class="col-lg-6 offset-lg-3">
+          <form id="subscribe-form" action="#" method="POST">
+            <div class="row">
+              <div class="col-lg-6 col-sm-6">
+                <fieldset>
+                  <input type="email" name="email" class="email" placeholder="آدرس ایمیل..." required>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="row mt-5">
+        <!-- تماس با ما -->
+        <div class="col-lg-3">
+          <div class="footer-widget">
+            <h4>تماس با ما</h4>
+            <p>تهران، خیابان ولیعصر</p>
+            <p><a href="tel:+982112345678">۰۲۱-۱۲۳۴۵۶۷۸</a></p>
+            <p><a href="mailto:info@complaint-system.ir">info@complaint-system.ir</a></p>
+          </div>
+        </div>
+        
+        <!-- لینک‌های سریع -->
+        <div class="col-lg-3">
+          <div class="footer-widget">
+            <h4>لینک‌های سریع</h4>
+            <ul>
+              <li><a href="{{ url_for('main.index') }}">خانه</a></li>
+              <li><a href="#">ثبت شکایت</a></li>
+              <li><a href="#">پیگیری شکایت</a></li>
+              <li><a href="#">سوالات متداول</a></li>
+              <li><a href="#">تماس با ما</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- خدمات -->
+        <div class="col-lg-3">
+          <div class="footer-widget">
+            <h4>خدمات ما</h4>
+            <ul>
+              <li><a href="#">ثبت شکایت آنلاین</a></li>
+              <li><a href="#">پیگیری وضعیت</a></li>
+              <li><a href="#">گزارش‌گیری</a></li>
+              <li><a href="#">پنل مدیریت</a></li>
+              <li><a href="#">پشتیبانی ۲۴/۷</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- درباره شرکت -->
+        <div class="col-lg-3">
+          <div class="footer-widget">
+            <h4>درباره سیستم</h4>
+            <div class="logo">
+              <img src="{{ url_for('static', filename='assets/images/white-logo.png') }}" alt="سیستم شکایات">
+            </div>
+            <p>سیستم جامع مدیریت شکایات مشتریان با هدف بهبود کیفیت خدمات ارائه می‌شود.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <div class="copyright-text">
+            <p>کلیه حقوق مادی و معنوی این سامانه متعلق به شرکت مدیریت شکایات می‌باشد. © 1404</p>
+            <p>طراحی: <a href="#" target="_blank">تیم توسعه</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer Area End ***** -->

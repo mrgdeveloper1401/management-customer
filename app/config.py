@@ -1,3 +1,4 @@
+from datetime import timedelta
 from decouple import config
 
 
@@ -19,3 +20,7 @@ class Config:
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # session
+    SESSION_TYPE = "filesystem"
+    PERMANENT_SESSION_LIFETIME = timedelta(days=14)

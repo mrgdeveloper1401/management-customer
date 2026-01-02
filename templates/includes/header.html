@@ -1,0 +1,59 @@
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="{{ url_for('main.index') }}" class="logo">
+              <img src="{{ url_for('static', filename='assets/images/logo.png') }}" alt="سیستم شکایات">
+            </a>
+            <!-- ***** Logo End ***** -->
+            
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section">
+                <a href="{{ url_for('main.index') }}" class="active">خانه</a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{{ url_for('main.index') }}#services">خدمات</a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{{ url_for('main.index') }}#about">درباره ما</a>
+              </li>
+              
+              <!-- منوی کاربر -->
+              {% if user %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-user"></i> {{ user.full_name }}
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> داشبورد</a></li>
+                    <li><a href="#"><i class="fa fa-user-cog"></i> پروفایل</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out-alt"></i> خروج</a></li>
+                  </ul>
+                </li>
+              {% else %}
+                <li>
+                  <div class="gradient-button">
+                    <a id="modal_trigger" href="#modal">
+                      <i class="fa fa-sign-in-alt"></i> ورود / ثبت‌نام
+                    </a>
+                  </div>
+                </li>
+              {% endif %}
+            </ul>
+            
+            <a class='menu-trigger'>
+              <span>منو</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->

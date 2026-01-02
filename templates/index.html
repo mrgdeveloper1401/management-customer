@@ -1,0 +1,333 @@
+{% extends "base.html" %} {% block title %}صفحه اصلی{% endblock %} {% block
+content %}
+<div id="modal" class="popupContainer" style="display: none">
+  <div class="popupHeader">
+    <span class="header_title">Login</span>
+    <span class="modal_close"><i class="fa fa-times"></i></span>
+  </div>
+
+  <section class="popupBody">
+    <!-- Social Login -->
+    <div class="social_login">
+      <div class="">
+        <a href="#" class="social_box fb">
+          <span class="icon"><i class="fab fa-facebook"></i></span>
+          <span class="icon_title">Connect with Facebook</span>
+        </a>
+
+        <a href="#" class="social_box google">
+          <span class="icon"><i class="fab fa-google-plus"></i></span>
+          <span class="icon_title">Connect with Google</span>
+        </a>
+      </div>
+
+      <div class="centeredText">
+        <span>Or use your Email address</span>
+      </div>
+
+      <div class="action_btns">
+        <div class="one_half">
+          <a href="#" id="login_form" class="btn">Login</a>
+        </div>
+        <div class="one_half last">
+          <a href="#" id="register_form" class="btn">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Username & Password Login form -->
+    <div class="user_login">
+      <form>
+        <label>Email / Username</label>
+        <input type="text" />
+        <br />
+
+        <label>Password</label>
+        <input type="password" />
+        <br />
+
+        <div class="checkbox">
+          <input id="remember" type="checkbox" />
+          <label for="remember">Remember me on this computer</label>
+        </div>
+
+        <div class="action_btns">
+          <div class="one_half">
+            <a href="#" class="btn back_btn"
+              ><i class="fa fa-angle-double-left"></i> Back</a
+            >
+          </div>
+          <div class="one_half last">
+            <a href="#" class="btn btn_red">Login</a>
+          </div>
+        </div>
+      </form>
+
+      <a href="#" class="forgot_password">Forgot password?</a>
+    </div>
+
+    <!-- Register Form -->
+    <div class="user_register">
+      <form>
+        <label>Full Name</label>
+        <input type="text" />
+        <br />
+
+        <label>Email Address</label>
+        <input type="email" />
+        <br />
+
+        <label>Password</label>
+        <input type="password" />
+        <br />
+
+        <div class="checkbox">
+          <input id="send_updates" type="checkbox" />
+          <label for="send_updates">Send me occasional email updates</label>
+        </div>
+
+        <div class="action_btns">
+          <div class="one_half">
+            <a href="#" class="btn back_btn"
+              ><i class="fa fa-angle-double-left"></i> Back</a
+            >
+          </div>
+          <div class="one_half last">
+            <a href="#" class="btn btn_red">Register</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<div
+  class="main-banner wow fadeIn"
+  id="top"
+  data-wow-duration="1s"
+  data-wow-delay="0.5s"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-6 align-self-center">
+            <div
+              class="left-content show-up header-text wow fadeInLeft"
+              data-wow-duration="1s"
+              data-wow-delay="1s"
+            >
+              <div class="row">
+                <div class="col-lg-12">
+                  <h2>سامانه مدیریت شکایات مشتریان</h2>
+                  <p>
+                    سامانه مدیریت شکایات یک نرم افزار تحت وب است که به منظور ثبت
+                    پیگیری ومدیریت شکایت ازمشتریان ارجاع به واحد ها ی مربوط
+                    پیگیری وضعیت و تولید گزارش های مدیریتی را فراهم می کند
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div
+              class="right-image wow fadeInRight"
+              data-wow-duration="1s"
+              data-wow-delay="0.5s"
+            >
+              <img
+                src="{{ url_for('static', filename='assets/images/slider-dec.png') }}"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="services" class="services section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div
+          class="section-heading wow fadeInDown"
+          data-wow-duration="1s"
+          data-wow-delay="0.5s"
+        >
+          <h4>خدمات <em>سرویس &amp; شگفت انگیر</em> برای شما</h4>
+          <img
+            src="{{ url_for('static', filename='assets/images/heading-line-dec.png') }}"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="service-item first-service">
+          <div class="icon"></div>
+          <h4>امنیت اطلاعات</h4>
+          <p>
+            حفاظت از اطلاعات کاربران با رمزنگاری پیشرفته و مطابقت با قوانین حریم خصوصی داده‌ها
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="service-item second-service">
+          <div class="icon"></div>
+          <h4>پردازش سریع</h4>
+          <p>
+            ثبت و پردازش آنی شکایات با سیستم پیشرفته و پاسخگویی در زمان تعیین شده طبق استانداردها
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="service-item third-service">
+          <div class="icon"></div>
+          <h4>فرآیند یکپارچه</h4>
+          <p>
+            مدیریت کامل چرخه شکایت از ثبت تا پیگیری و حل نهایی با گردش کار استاندارد و شفاف
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="service-item fourth-service">
+          <div class="icon"></div>
+          <h4>24/7 کمک &amp; پشتیبانی</h4>
+          <p>
+            سیستم پشتیبانی ۲۴ ساعته برای پاسخگویی به سوالات و حل مشکلات کاربران در کمترین زمان ممکن
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="about" class="about-us section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="section-heading">
+            <h4>درباره <em>سیستم مدیریت شکایات</em> &amp; اهداف ما</h4>
+            <img
+              src="{{ url_for('static', filename='assets/images/heading-line-dec.png') }}"
+              alt=""
+            />
+            <p>
+              ما یک پلتفرم جامع برای ثبت، پیگیری و مدیریت شکایات مشتریان ارائه می‌دهیم 
+              تا ارتباط شفاف‌تری بین ارائه‌دهندگان خدمات و مشتریان برقرار شود.
+            </p>
+          </div>
+          <div class="row">
+            <!-- گزینه ۱ -->
+            <div class="col-lg-6">
+              <div class="box-item">
+                <h4><a href="create_complaint">ثبت شکایت آسان</a></h4>
+                <p>فرم ساده و سریع ثبت شکایت در کمتر از ۵ دقیقه</p>
+              </div>
+            </div>
+            
+            <!-- گزینه ۲ -->
+            <div class="col-lg-6">
+              <div class="box-item">
+                <h4><a href="status">پیگیری لحظه‌ای</a></h4>
+                <p>مشاهده وضعیت شکایت با کد رهگیری به صورت آنلاین</p>
+              </div>
+            </div>
+            
+            <!-- گزینه ۳ -->
+            <div class="col-lg-6">
+              <div class="box-item">
+                <h4><a href="#">پشتیبانی ۲۴ ساعته</a></h4>
+                <p>تیم پشتیبانی ما در تمام ساعات شبانه‌روز پاسخگوی شماست</p>
+              </div>
+            </div>
+            
+            <!-- گزینه ۴ -->
+            <div class="col-lg-6">
+              <div class="box-item">
+                <h4><a href="dashboard">گزارش‌گیری پیشرفته</a></h4>
+                <p>تهیه گزارش‌های تحلیلی و آماری از روند شکایات</p>
+              </div>
+            </div>
+            
+            <div class="col-lg-12 mt-4">
+              <p>
+                هدف ما ایجاد بستری امن و شفاف برای ثبت شکایات است تا از این طریق 
+                کیفیت خدمات ارائه شده بهبود یابد و رضایت مشتریان افزایش پیدا کند.
+              </p>
+              
+              <!-- دکمه‌های CTA -->
+              <div class="row mt-4">
+                <div class="col-md-6 mb-3">
+                  <div class="gradient-button">
+                    <a href="create_complenate">
+                      <i class="fa fa-edit"></i> ثبت شکایت جدید
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="secondary-button">
+                    <a href="contact">
+                      <i class="fa fa-question-circle"></i> راهنمای استفاده
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- آمار و ارقام -->
+              <div class="row mt-4">
+                <div class="col-12">
+                  <div class="stats-box">
+                    <div class="row text-center">
+                      <div class="col-4">
+                        <h3 class="text-primary">۹۸%</h3>
+                        <p>رضایت کاربران</p>
+                      </div>
+                      <div class="col-4">
+                        <h3 class="text-success">۲۴h</h3>
+                        <p>پاسخگویی سریع</p>
+                      </div>
+                      <div class="col-4">
+                        <h3 class="text-warning">۱۰۰۰+</h3>
+                        <p>شکایت ثبت شده</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- عکس سمت راست -->
+        <div class="col-lg-6">
+          <div class="right-image">
+            <img
+              src="{{ url_for('static', filename='assets/images/about-right-dec.png') }}"
+              alt="سیستم مدیریت شکایات"
+              class="img-fluid"
+            />
+            
+            <!-- توضیحات زیر عکس -->
+            <div class="image-caption mt-4">
+              <h5>چرا سیستم ما؟</h5>
+              <ul class="list-unstyled">
+                <li><i class="fa fa-check-circle text-success"></i> ثبت ناشناس یا با مشخصات کامل</li>
+                <li><i class="fa fa-check-circle text-success"></i> امنیت بالا و حفظ حریم خصوصی</li>
+                <li><i class="fa fa-check-circle text-success"></i> پشتیبانی از پیوست مدارک</li>
+                <li><i class="fa fa-check-circle text-success"></i> اعلان خودکار در هر مرحله</li>
+                <li><i class="fa fa-check-circle text-success"></i> سازگار با تمام دستگاه‌ها</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -8,6 +8,7 @@ class UserRole(Enum):
     CUSTOMER = "customer"
     EXPERT = "expert"
     ADMIN = "admin"
+    SUPERUSER = "superuser"
 
 class ComplaintStatus(Enum):
     NEW = "new"
@@ -37,7 +38,7 @@ class User(TimestampMixin, SoftDeleteMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
     email = db.Column(db.String(100), nullable=False)
     full_name = db.Column(db.String(100), nullable=False)
@@ -47,6 +48,35 @@ class User(TimestampMixin, SoftDeleteMixin, db.Model):
         db.Enum(UserRole),
         nullable=False
     )
+
+    def __str__(self) -> str:
+        return self.username
+
+    def __repr__(self):
+        return f'<User {self.id}>'
+
+    def get_id(self):
+        return self.id
+
+    @property
+    def is_expert(self):
+        return self.role == UserRole.EXPERT
+
+    @property
+    def is_customer(self):
+        return self.role == UserRole.CUSTOMER
+
+    @property
+    def is_active(self):
+        return not self.is_deleted
+
+    @property
+    def is_staff(self):
+        return self.role == UserRole.ADMIN
+
+    @property
+    def is_superuser(self):
+        return self.role == UserRole.SUPERUSER
 
 
 class Complaint(TimestampMixin, SoftDeleteMixin, db.Model):
