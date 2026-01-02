@@ -28,7 +28,7 @@
                   <i class="fa fa-user"></i> {{ user.full_name }}
                   <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
+                <!-- <ul class="dropdown-menu"> -->
                   {% if user.is_customer %}
                     <li><a href="{{ url_for('main.dashboard') }}"><i class="fa fa-dashboard"></i> داشبورد</a></li>
                     <li><a href="{{ url_for('main.create_complaint') }}"><i class="fa fa-edit"></i> ثبت شکایت</a></li>
@@ -41,7 +41,7 @@
                   <li><a href="#"><i class="fa fa-user-cog"></i> پروفایل</a></li>
                   <li class="divider"></li>
                   <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-sign-out-alt"></i> خروج</a></li>
-                </ul>
+                <!-- </ul> -->
               </li>
             {% else %}
               <li>
