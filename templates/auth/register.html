@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}ثبت‌نام{% endblock %}
+
+{% block content %}
+<div class="main-banner" id="top">
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="header-text">
+                    <h2>ایجاد حساب کاربری</h2>
+                    <p>لطفاً اطلاعات خود را برای ثبت‌نام وارد کنید</p>
+                </div>
+                
+                <div class="contact-form">
+                    <form method="POST" action="{{ url_for('auth.register') }}">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label for="full_name">نام کامل</label>
+                                    <input type="text" name="full_name" id="full_name" placeholder="نام و نام خانوادگی" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label for="username">نام کاربری</label>
+                                    <input type="text" name="username" id="username" placeholder="نام کاربری" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <label for="email">ایمیل</label>
+                                    <input type="email" name="email" id="email" placeholder="آدرس ایمیل" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label for="phone">شماره تلفن</label>
+                                    <input type="text" name="phone" id="phone" placeholder="09xxxxxxxxx" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label for="password">رمز عبور</label>
+                                    <input type="password" name="password" id="password" placeholder="رمز عبور" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label for="confirm_password">تکرار رمز عبور</label>
+                                    <input type="password" name="confirm_password" id="confirm_password" placeholder="تکرار رمز عبور" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            با <a href="#">قوانین و مقررات</a> موافقم
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button">
+                                        <i class="fa fa-user-plus"></i> ثبت‌نام
+                                    </button>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="text-center mt-3">
+                                    <p>قبلاً ثبت‌نام کرده‌اید؟ <a href="{{ url_for('auth.login') }}">وارد شوید</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,274 @@
+.contact-form {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.contact-form fieldset {
+  margin-bottom: 25px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="password"],
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #f7f7f7;
+  border: 1px solid #e5e5e5;
+  outline: none;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  border-color: #7453fc;
+  background-color: #fff;
+}
+
+.contact-form textarea {
+  height: 150px;
+  padding: 15px 20px;
+  resize: vertical;
+}
+
+/* استایل checkbox */
+.form-check {
+  margin: 15px 0;
+  text-align: right;
+}
+
+.form-check-input {
+  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.form-check-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.form-check-label a {
+  color: #7453fc;
+  text-decoration: none;
+}
+
+.form-check-label a:hover {
+  text-decoration: underline;
+}
+
+.main-button {
+  display: inline-block;
+  background-color: #7453fc;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 30px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.main-button:hover {
+  background-color: #5a3adf;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(116, 83, 252, 0.3);
+}
+
+.main-button i {
+  margin-left: 8px;
+}
+
+.dashboard-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.dashboard-card .card-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.table-responsive {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background-color: #7453fc;
+  color: white;
+  border: none;
+  font-weight: 500;
+  padding: 15px;
+}
+
+.table tbody td {
+  padding: 15px;
+  vertical-align: middle;
+  border-color: #f0f0f0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(116, 83, 252, 0.03);
+}
+
+.badge {
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 20px;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+.alert {
+  border-radius: 10px;
+  border: none;
+  padding: 20px;
+}
+
+.alert-info {
+  background-color: rgba(116, 83, 252, 0.1);
+  color: #7453fc;
+  border-right: 4px solid #7453fc;
+}
+
+.contact-form a {
+  color: #7453fc;
+  text-decoration: none;
+}
+
+.contact-form a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 20px;
+  }
+
+  .dashboard-card {
+    margin-bottom: 15px;
+  }
+
+  .table-responsive {
+    font-size: 14px;
+  }
+
+  .main-button {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+.flash-messages {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.flash-message {
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flash-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-right: 4px solid #28a745;
+}
+
+.flash-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-right: 4px solid #dc3545;
+}
+
+.flash-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-right: 4px solid #ffc107;
+}
+
+.flash-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-right: 4px solid #17a2b8;
+}

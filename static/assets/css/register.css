@@ -1,0 +1,216 @@
+.register-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.register-container {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.register-left {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register-left h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.register-left p {
+  font-size: 16px;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.register-left ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.register-left ul li {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.register-left ul li i {
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+.register-right {
+  padding: 50px;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.register-header h3 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.register-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-left: 45px;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #28a745;
+  font-size: 18px;
+}
+
+.password-strength {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.strength-bar {
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  background: #dc3545;
+  transition: all 0.3s ease;
+}
+
+.strength-fill.weak {
+  width: 33%;
+  background: #dc3545;
+}
+
+.strength-fill.medium {
+  width: 66%;
+  background: #ffc107;
+}
+
+.strength-fill.strong {
+  width: 100%;
+  background: #28a745;
+}
+
+.terms-checkbox {
+  margin: 20px 0;
+}
+
+.terms-checkbox label {
+  font-size: 14px;
+  color: #666;
+}
+
+.terms-checkbox a {
+  color: #28a745;
+  text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+  text-decoration: underline;
+}
+
+.register-button {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+}
+
+.register-button i {
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 30px;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .register-left {
+    display: none;
+  }
+
+  .register-right {
+    padding: 30px;
+  }
+}
+
+.main-banner {
+  background-color: #dc3545;
+}

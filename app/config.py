@@ -8,7 +8,7 @@ class Config:
     POSTGRES_NAME = config("POSTDB_NAME", cast=str, default="complaintsdb")
     POSTGRES_PASSWORD = config("POSTDB_PASSWORD", cast=str, default="postgres")
     POSTGRES_HOST = config("POSTDB_HOST", cast=str, default="localhost")
-    POSTGRES_PORT = config("POSTDB_PORT", cast=int, default=5432)
+    POSTGRES_PORT = config("POSTDB_PORT", cast=int, default=5434)
     POSTGRES_USER = config("POSTDB_USER", cast=str, default="postgres")
 
     SQLALCHEMY_DATABASE_URI = (

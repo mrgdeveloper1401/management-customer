@@ -182,6 +182,13 @@ $(function() {
 
     });
 
+    // Also hide preloader immediately when DOM is ready
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#js-preloader').addClass('loaded');
+        }, 100);
+    });
+
 	
 
 	// Window Resize Mobile Menu Fix

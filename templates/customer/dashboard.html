@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}داشبورد مشتری{% endblock %}
+
+{% block content %}
+<div class="main-banner" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-text">
+                    <h2>داشبورد کاربری</h2>
+                    <p>سلام {{ user.full_name }}! به پنل کاربری خود خوش آمدید</p>
+                </div>
+                
+                <!-- آمار کاربر -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ complaints|length }}</h5>
+                                <p class="card-text">شکایت‌های شما</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ complaints|selectattr('status', 'equalto', 'NEW')|list|length }}</h5>
+                                <p class="card-text">جدید</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ complaints|selectattr('status', 'equalto', 'IN_PROGRESS')|list|length }}</h5>
+                                <p class="card-text">در حال بررسی</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ complaints|selectattr('status', 'equalto', 'CLOSED')|list|length }}</h5>
+                                <p class="card-text">بسته شده</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- دکمه‌های عملیاتی -->
+                <div class="row mb-4">
+                    <div class="col-lg-12">
+                        <a href="{{ url_for('main.create_complaint') }}" class="btn btn-primary btn-lg">
+                            <i class="fa fa-plus"></i> ثبت شکایت جدید
+                        </a>
+                        <a href="{{ url_for('main.track_complaint') }}" class="btn btn-secondary btn-lg">
+                            <i class="fa fa-search"></i> پیگیری شکایت
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- لیست شکایات -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>شکایت‌های شما</h4>
+                            </div>
+                            <div class="card-body">
+                                {% if complaints %}
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>کد رهگیری</th>
+                                                    <th>نوع شکایت</th>
+                                                    <th>تاریخ ثبت</th>
+                                                    <th>وضعیت</th>
+                                                    <th>عملیات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for complaint in complaints %}
+                                                <tr>
+                                                    <td>{{ complaint.tracking_code }}</td>
+                                                    <td>{{ complaint.complaint_type }}</td>
+                                                    <td>{{ complaint.created_at.strftime('%Y/%m/%d %H:%M') }}</td>
+                                                    <td>
+                                                        {% if complaint.status.value == 'NEW' %}
+                                                            <span class="badge bg-warning">جدید</span>
+                                                        {% elif complaint.status.value == 'IN_PROGRESS' %}
+                                                            <span class="badge bg-info">در حال بررسی</span>
+                                                        {% elif complaint.status.value == 'ANSWERED' %}
+                                                            <span class="badge bg-success">پاسخ داده شده</span>
+                                                        {% elif complaint.status.value == 'CLOSED' %}
+                                                            <span class="badge bg-secondary">بسته شده</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-sm btn-info">مشاهده</a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-info">
+                                        <p>هنوز شکایتی ثبت نکرده‌اید.</p>
+                                        <a href="{{ url_for('main.create_complaint') }}" class="btn btn-primary">ثبت اولین شکایت</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 import uuid
-
+from flask_login import UserMixin
 from app.database import db
-from enum import Enum
+from enum import Enum, unique
 
 
 class UserRole(Enum):
@@ -32,18 +32,18 @@ class SoftDeleteMixin:
     is_deleted = db.Column(db.Boolean, default=False)
 
 
-class User(TimestampMixin, SoftDeleteMixin, db.Model):
+class User(UserMixin, TimestampMixin, SoftDeleteMixin, db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
 
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
 
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     full_name = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(15), nullable=False)
-
+    complaints = db.relationship('Complaint', backref='user', lazy=True)
     role = db.Column(
         db.Enum(UserRole),
         nullable=False
@@ -55,8 +55,17 @@ class User(TimestampMixin, SoftDeleteMixin, db.Model):
     def __repr__(self):
         return f'<User {self.id}>'
 
-    def get_id(self):
-        return self.id
+    @property
+    def is_authenticated(self):
+        return bool(self.id) and not self.is_deleted
+    
+    @property
+    def is_active(self):
+        return not self.is_deleted
+    
+    @property
+    def is_anonymous(self):
+        return not self.is_authenticated
 
     @property
     def is_expert(self):
@@ -65,10 +74,6 @@ class User(TimestampMixin, SoftDeleteMixin, db.Model):
     @property
     def is_customer(self):
         return self.role == UserRole.CUSTOMER
-
-    @property
-    def is_active(self):
-        return not self.is_deleted
 
     @property
     def is_staff(self):
