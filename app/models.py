@@ -107,7 +107,6 @@ class Complaint(TimestampMixin, SoftDeleteMixin, db.Model):
         default=ComplaintStatus.NEW,
         nullable=False
     )
-    is_anonymous = db.Column(db.Boolean, default=True)
 
 
 class Attachment(TimestampMixin, SoftDeleteMixin, db.Model):

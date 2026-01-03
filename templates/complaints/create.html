@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/complaints.css') }}">
+{% endblock %}
+
+{% block title %}ثبت شکایت جدید{% endblock %}
+
+{% block content %}
+<div class="complaint-banner">
+    <div class="container">
+        <div class="complaint-header">
+            <h2>📝 ثبت شکایت جدید</h2>
+            <p>لطفاً اطلاعات شکایت خود را با دقت وارد کنید. ما در کوتاه‌ترین زمان ممکن پاسخگو خواهیم بود.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="complaint-form-container">
+                <form method="POST" action="{{ url_for('main.create_complaint') }}" enctype="multipart/form-data" class="complaint-form" id="complaintForm">
+                    <div class="form-group">
+                        <label for="complaint_type" class="required">نوع شکایت</label>
+                        <select name="complaint_type" id="complaint_type" class="form-control" required>
+                            <option value="">-- لطفاً نوع شکایت را انتخاب کنید --</option>
+                            <option value="product_quality">کیفیت محصول</option>
+                            <option value="delivery_delay">تأخیر در تحویل</option>
+                            <option value="customer_service">خدمات مشتری</option>
+                            <option value="technical_issue">مشکل فنی</option>
+                            <option value="payment_issue">مشکل پرداخت</option>
+                            <option value="other">سایر</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="invoice_number">شماره سفارش (اختیاری)</label>
+                        <input type="text" name="invoice_number" id="invoice_number" 
+                               class="form-control" placeholder="مثال: ORD-123456">
+                        <small class="text-muted">در صورت داشتن شماره سفارش، وارد کنید</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="required">شرح کامل شکایت</label>
+                        <textarea name="description" id="description" class="form-control" 
+                                  placeholder="لطفاً شکایت خود را به طور کامل شرح دهید..." required></textarea>
+                        <small class="text-muted">حداقل ۱۰۰ کاراکتر توصیه می‌شود</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>مدارک و مستندات</label>
+                        <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h5>فایل‌های خود را اینجا رها کنید یا کلیک کنید</h5>
+                            <p>حداکثر ۵ فایل (JPG, PNG, PDF, DOC) - حداکثر سایز ۵MB</p>
+                        </div>
+                        <input type="file" name="attachments" id="fileInput" multiple 
+                               accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" 
+                               style="display: none;">
+                        
+                        <div class="file-list" id="fileList">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> ثبت شکایت
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="info-card">
+                <h4>📌 نکات مهم</h4>
+                <ul class="info-list">
+                    <li><i class="fas fa-check-circle"></i> شکایت شما در کمتر از ۲۴ ساعت بررسی می‌شود</li>
+                    <li><i class="fas fa-check-circle"></i> کد رهگیری منحصر به فرد دریافت خواهید کرد</li>
+                    <li><i class="fas fa-check-circle"></i> می‌توانید از طریق کد رهگیری پیگیری کنید</li>
+                    <li><i class="fas fa-check-circle"></i> در هر مرحله اطلاع‌رسانی انجام می‌شود</li>
+                    <li><i class="fas fa-check-circle"></i> حریم خصوصی شما کاملاً حفظ می‌شود</li>
+                </ul>
+            </div>
+
+            <div class="response-time">
+                <h5>⏰ زمان پاسخگویی</h5>
+                <p>پاسخ اولیه: حداکثر ۲۴ ساعت</p>
+                <p>حل نهایی: ۳ تا ۷ روز کاری</p>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">🔗 لینک‌های مفید</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('main.track_complaint') }}" class="text-primary">
+                            <i class="fas fa-search"></i> پیگیری شکایت
+                        </a></li>
+                        <li class="mb-2"><a href="{{ url_for('main.dashboard') }}" class="text-primary">
+                            <i class="fas fa-tachometer-alt"></i> داشبورد کاربری
+                        </a></li>
+                        <li class="mb-2"><a href="#" class="text-primary">
+                            <i class="fas fa-question-circle"></i> راهنمای ثبت شکایت
+                        </a></li>
+                        <li><a href="#" class="text-primary">
+                            <i class="fas fa-file-alt"></i> قوانین و مقررات
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = '';
+    
+    Array.from(e.target.files).forEach(file => {
+        if (file.size > 5 * 1024 * 1024) {
+            alert(`فایل "${file.name}" بیش از حد مجاز است (حداکثر ۵MB)`);
+            return;
+        }
+        
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+        fileItem.innerHTML = `
+            <span class="file-name">📄 ${file.name} (${(file.size / 1024).toFixed(1)}KB)</span>
+            <span class="file-remove" onclick="removeFile('${file.name}')">
+                <i class="fas fa-times"></i>
+            </span>
+        `;
+        fileList.appendChild(fileItem);
+    });
+});
+
+function removeFile(fileName) {
+    alert('در این نسخه دمو، امکان حذف فایل وجود ندارد');
+}
+
+document.getElementById('complaintForm').addEventListener('submit', function(e) {
+    const description = document.getElementById('description').value;
+    const complaintType = document.getElementById('complaint_type').value;
+    
+    if (!complaintType) {
+        e.preventDefault();
+        alert('لطفاً نوع شکایت را انتخاب کنید');
+        return;
+    }
+    
+    if (description.length < 20) {
+        e.preventDefault();
+        alert('لطفاً شرح شکایت را با جزئیات بیشتری بنویسید (حداقل ۲۰ کاراکتر)');
+        return;
+    }
+    
+    const submitBtn = this.querySelector('.submit-btn');
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
+    submitBtn.disabled = true;
+});
+</script>
+{% endblock %}

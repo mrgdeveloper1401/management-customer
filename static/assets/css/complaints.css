@@ -1,0 +1,269 @@
+.complaint-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 100px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.complaint-banner:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.complaint-banner .container {
+  position: relative;
+  z-index: 2;
+}
+
+.complaint-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.complaint-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.complaint-header p {
+  font-size: 18px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.complaint-form-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+}
+
+.complaint-form .form-group {
+  margin-bottom: 25px;
+}
+
+.complaint-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.complaint-form label.required:after {
+  content: " *";
+  color: #f44336;
+}
+
+.complaint-form input[type="text"],
+.complaint-form input[type="number"],
+.complaint-form select,
+.complaint-form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s;
+  background: #f9f9f9;
+}
+
+.complaint-form input:focus,
+.complaint-form select:focus,
+.complaint-form textarea:focus {
+  outline: none;
+  border-color: #4b8ef1;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(75, 142, 241, 0.1);
+}
+
+.complaint-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.file-upload-area {
+  border: 2px dashed #4b8ef1;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  background: #f8fbff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.file-upload-area:hover {
+  background: #edf5ff;
+  border-color: #3a7de0;
+}
+
+.file-upload-area i {
+  font-size: 48px;
+  color: #4b8ef1;
+  margin-bottom: 15px;
+}
+
+.file-upload-area h5 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.file-upload-area p {
+  color: #666;
+  font-size: 14px;
+}
+
+#fileInput {
+  display: none;
+}
+
+.file-list {
+  margin-top: 20px;
+}
+
+.file-item {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-item .file-name {
+  flex: 1;
+  color: #333;
+}
+
+.file-item .file-remove {
+  color: #f44336;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.form-check-label {
+  cursor: pointer;
+  color: #666;
+  font-size: 15px;
+}
+
+.submit-btn {
+  background: linear-gradient(105deg, #5b68eb 0%, #28e1fd 100%);
+  color: white !important;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px auto 0;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(91, 104, 235, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.info-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.info-card h4 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.info-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-list li:last-child {
+  border-bottom: none;
+}
+
+.info-list i {
+  color: #28e1fd;
+}
+
+.response-time {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.response-time h5 {
+  color: #4b8ef1;
+  margin-bottom: 10px;
+}
+
+.response-time p {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .complaint-header h2 {
+    font-size: 28px;
+  }
+
+  .complaint-form-container {
+    padding: 20px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}

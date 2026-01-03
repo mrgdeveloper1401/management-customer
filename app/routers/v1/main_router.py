@@ -33,17 +33,27 @@ def create_complaint():
     if request.method == 'POST':
         complaint_type = request.form.get('complaint_type')
         description = request.form.get('description')
-        is_anonymous = request.form.get('is_anonymous') == 'on'
+        invoice_number = request.form.get('invoice_number')
+        # is_anonymous = request.form.get('is_anonymous') == 'on'
 
         if not complaint_type or not description:
             flash('لطفاً تمام فیلدهای ضروری را پر کنید', 'error')
             return redirect(url_for('main.create_complaint'))
-    
+
+        # handle attachment
+        attachments = []
+        if "attachments" in request.files:
+            files = request.files.getlist("attachment")
+            for file in files:
+                if file.filename != "":
+                    attachments.append(file.filename)
+
         complaint = Complaint(
             user_id=current_user.id,
             complaint_type=complaint_type,
             description=description,
-            is_anonymous=is_anonymous,
+            # is_anonymous=is_anonymous,
+            invoice_number=invoice_number,
             status=ComplaintStatus.NEW
         )
         
