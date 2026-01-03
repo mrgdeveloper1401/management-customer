@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/complaint-detail.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block title %}مشاهده شکایت - {{ complaint.tracking_code }}{% endblock %}
+
+{% block content %}
+<div class="complaint-detail-banner">
+    <div class="container">
+        <div class="complaint-detail-header">
+            <h2>🔍 مشاهده شکایت</h2>
+            <p>جزئیات کامل شکایت شما</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="mb-4">
+        <a href="{{ url_for('main.dashboard') }}" class="btn-action btn-back">
+            <i class="fas fa-arrow-right"></i> بازگشت به داشبورد
+        </a>
+    </div>
+
+    <div class="complaint-detail-card">
+        <div class="complaint-header-card">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <div class="complaint-tracking-code">
+                        <i class="fas fa-barcode"></i>
+                        کد رهگیری: <span id="trackingCode">{{ complaint.tracking_code }}</span>
+                    </div>
+                    <div>
+                        <span class="complaint-status-badge status-{{ complaint.status.value|lower|replace('_', '-') }}">
+                            {% if complaint.status.value == 'new' %}
+                                <i class="fas fa-clock"></i> جدید
+                            {% elif complaint.status.value == 'in_progress' %}
+                                <i class="fas fa-spinner fa-spin"></i> در حال بررسی
+                            {% elif complaint.status.value == 'answered' %}
+                                <i class="fas fa-check-circle"></i> پاسخ داده شده
+                            {% elif complaint.status.value == 'closed' %}
+                                <i class="fas fa-lock"></i> بسته شده
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="text-white">
+                    <button onclick="printComplaint()" class="btn-action btn-print">
+                        <i class="fas fa-print"></i> چاپ
+                    </button>
+                    <button onclick="shareComplaint()" class="btn-action btn-share">
+                        <i class="fas fa-share-alt"></i> اشتراک‌گذاری
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="complaint-info-section">
+            <div class="info-row">
+                <div class="info-label">📅 تاریخ ثبت</div>
+                <div class="info-value bold">{{ complaint.created_at.strftime('%Y/%m/%d - %H:%M') }}</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">🏷️ نوع شکایت</div>
+                <div class="info-value">{{ complaint.complaint_type }}</div>
+            </div>
+
+            {% if complaint.invoice_number %}
+            <div class="info-row">
+                <div class="info-label">📄 شماره سفارش</div>
+                <div class="info-value bold">{{ complaint.invoice_number }}</div>
+            </div>
+            {% endif %}
+
+            <div class="info-row">
+                <div class="info-label">👤 ثبت‌کننده</div>
+                <div class="info-value">
+                    {% if complaint.is_anonymous %}
+                        <span class="text-muted">ناشناس</span>
+                    {% else %}
+                        {{ complaint.user.full_name }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="description-box">
+                <h5><i class="fas fa-file-alt"></i> شرح شکایت</h5>
+                <div class="description-content">
+                    {{ complaint.description }}
+                </div>
+            </div>
+
+            <div class="attachments-section">
+                <h5><i class="fas fa-paperclip"></i> پیوست‌ها</h5>
+                {% if complaint.attachments %}
+                    <div class="attachments-list">
+                        {% for attachment in complaint.attachments %}
+                        <div class="attachment-item">
+                            <div class="attachment-icon">
+                                {% if attachment.file_type in ['image/jpeg', 'image/png', 'image/gif'] %}
+                                    <i class="fas fa-image"></i>
+                                {% elif attachment.file_type == 'application/pdf' %}
+                                    <i class="fas fa-file-pdf"></i>
+                                {% elif 'word' in attachment.file_type %}
+                                    <i class="fas fa-file-word"></i>
+                                {% else %}
+                                    <i class="fas fa-file"></i>
+                                {% endif %}
+                            </div>
+                            <div class="attachment-info">
+                                <div class="attachment-name">{{ attachment.file_name }}</div>
+                                <div class="attachment-size">{{ attachment.file_size }}</div>
+                            </div>
+                            <a href="{{ url_for('static', filename='uploads/' ~ attachment.file_path) }}" 
+                               target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> هیچ فایل پیوستی وجود ندارد
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="timeline-section">
+                <h5><i class="fas fa-history"></i> تاریخچه شکایت</h5>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">{{ complaint.created_at.strftime('%Y/%m/%d %H:%M') }}</div>
+                            <div class="timeline-title">ثبت شکایت</div>
+                            <div class="timeline-description">شکایت با کد رهگیری {{ complaint.tracking_code }} ثبت شد</div>
+                        </div>
+                    </div>
+
+                    {% if complaint.status.value in ['IN_PROGRESS', 'ANSWERED', 'CLOSED'] %}
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">{{ complaint.updated_at.strftime('%Y/%m/%d %H:%M') if complaint.updated_at else '' }}</div>
+                            <div class="timeline-title">بررسی اولیه</div>
+                            <div class="timeline-description">شکایت توسط واحد مربوطه بررسی شد</div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="responses-section">
+        <h4 class="mb-4"><i class="fas fa-comments"></i> مکاتبات</h4>
+        
+        {% if complaint.responses %}
+            {% for response in complaint.responses %}
+            <div class="response-card {% if response.responded_by.role.value in ['expert', 'admin'] %}expert-response{% else %}user-response{% endif %}">
+                <div class="response-header">
+                    <div class="response-sender">
+                        <div class="sender-avatar">
+                            {{ response.responded_by.full_name[:1] }}
+                        </div>
+                        <div class="sender-info">
+                            <h6>{{ response.responded_by.full_name }}</h6>
+                            <small>
+                                {% if response.responded_by.role.value == 'expert' %}
+                                    کارشناس پشتیبانی
+                                {% elif response.responded_by.role.value == 'admin' %}
+                                    مدیر سیستم
+                                {% else %}
+                                    مشتری
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="response-time">
+                        {{ response.responded_at.strftime('%Y/%m/%d - %H:%M') }}
+                        {% if response.is_final %}
+                            <span class="badge bg-success">پاسخ نهایی</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="response-content">
+                    {{ response.response_text }}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> هنوز هیچ پاسخی ثبت نشده است
+            </div>
+        {% endif %}
+
+        {% if complaint.status.value != 'CLOSED' and current_user.is_customer %}
+        <div class="response-form-section">
+            <h4><i class="fas fa-reply"></i> ارسال پاسخ</h4>
+            <form method="POST" action="{{ url_for('main.send_response', id=complaint.id) }}" class="response-form">
+                <textarea name="response_text" placeholder="پاسخ خود را اینجا بنویسید..." required></textarea>
+                <div class="form-actions">
+                    <button type="submit" class="btn-send">
+                        <i class="fas fa-paper-plane"></i> ارسال پاسخ
+                    </button>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="request_info" id="request_info">
+                        <label class="form-check-label" for="request_info">
+                            درخواست اطلاعات بیشتر
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('main.dashboard') }}" class="btn-action btn-back">
+            <i class="fas fa-arrow-right"></i> بازگشت
+        </a>
+        
+        {% if complaint.status.value != 'closed' and current_user.is_customer %}
+        <a href="#" class="btn-action btn-warning" data-bs-toggle="modal" data-bs-target="#closeModal">
+            <i class="fas fa-lock"></i> بستن شکایت
+        </a>
+        {% endif %}
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('trackingCode').addEventListener('click', function() {
+    const text = this.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const original = this.textContent;
+        this.textContent = 'کپی شد!';
+        setTimeout(() => {
+            this.textContent = original;
+        }, 2000);
+    });
+});
+
+function printComplaint() {
+    window.print();
+}
+
+function shareComplaint() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'شکایت شماره ' + document.getElementById('trackingCode').textContent,
+            text: 'وضعیت شکایت من در سامانه مدیریت شکایات',
+            url: window.location.href
+        });
+    } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('لینک شکایت در کلیپ‌بورد کپی شد!');
+        });
+    }
+}
+
+document.querySelectorAll('.btn-reply').forEach(button => {
+    button.addEventListener('click', function() {
+        const form = this.nextElementSibling;
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+});
+</script>
+{% endblock %}

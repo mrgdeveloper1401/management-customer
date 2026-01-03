@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from app.models import User, UserRole, Complaint, ComplaintStatus
+from app.models import User, UserRole, Complaint, ComplaintStatus, Response
 from app.database import db
 
 main_router = Blueprint('main', __name__)
@@ -64,6 +64,44 @@ def create_complaint():
         return redirect(url_for('main.dashboard'))
     
     return render_template('complaints/create.html')
+
+@main_router.route("/complaints/<int:id>")
+@login_required
+def view_complaint(id):
+    user_id = current_user.id
+    complaint = Complaint.query.filter_by(id=id, user_id=user_id).first_or_404()
+    return render_template("complaints/complaint-detail.html", complaint=complaint)
+
+
+@main_router.route("/complaints/<int:id>/response", methods=['POST'])
+@login_required
+def send_response(id):
+    user_id = current_user.id
+    complaint = Complaint.query.filter_by(id=id, user_id=user_id).first_or_404()
+
+    if not current_user.is_customer:
+        flash('فقط مشتریان می‌توانند پاسخ ارسال کنند', 'error')
+        return redirect(url_for('main.view_complaint', id=id))
+
+    response_text = request.form.get('response_text', '').strip()
+
+    if not response_text:
+        flash('لطفاً متن پاسخ را وارد کنید', 'error')
+        return redirect(url_for('main.view_complaint', id=id))
+
+    # Create new response
+    response = Response(
+        complaint_id=complaint.id,
+        responded_by=current_user.id,
+        response_text=response_text,
+        is_final=False
+    )
+
+    db.session.add(response)
+    db.session.commit()
+
+    flash('پاسخ شما با موفقیت ارسال شد', 'success')
+    return redirect(url_for('main.view_complaint', id=id))
 
 @main_router.route('/complaints/track', methods=['GET', 'POST'])
 def track_complaint():

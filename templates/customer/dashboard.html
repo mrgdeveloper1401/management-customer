@@ -87,18 +87,18 @@
                                                     <td>{{ complaint.complaint_type }}</td>
                                                     <td>{{ complaint.created_at.strftime('%Y/%m/%d %H:%M') }}</td>
                                                     <td>
-                                                        {% if complaint.status.value == 'NEW' %}
+                                                        {% if complaint.status.value == 'new' %}
                                                             <span class="badge bg-warning">جدید</span>
-                                                        {% elif complaint.status.value == 'IN_PROGRESS' %}
+                                                        {% elif complaint.status.value == 'in_progress' %}
                                                             <span class="badge bg-info">در حال بررسی</span>
-                                                        {% elif complaint.status.value == 'ANSWERED' %}
+                                                        {% elif complaint.status.value == 'answered' %}
                                                             <span class="badge bg-success">پاسخ داده شده</span>
-                                                        {% elif complaint.status.value == 'CLOSED' %}
+                                                        {% elif complaint.status.value == 'closed' %}
                                                             <span class="badge bg-secondary">بسته شده</span>
                                                         {% endif %}
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-info">مشاهده</a>
+                                                        <a href="{{ url_for('main.view_complaint', id=complaint.id) }}" class="btn btn-sm btn-info">مشاهده</a>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
